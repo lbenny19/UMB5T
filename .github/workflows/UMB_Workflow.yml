@@ -25,7 +25,7 @@ jobs:
   Extract-CDMF:
     name: CDMF file extraction
     runs-on: ubuntu-latest
-    needs: build-umbrella 
+    needs: Build-job
     environment: process-cdmf 
 
     steps:
@@ -38,7 +38,7 @@ jobs:
   SUP4-Deploy:
     name: Deploy to SUP4 Node
     runs-on: ubuntu-latest
-    needs: prepare-cdmf 
+    needs: Extract-CDMF
     environment: SUP4 
    
     steps:

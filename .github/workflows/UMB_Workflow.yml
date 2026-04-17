@@ -47,7 +47,7 @@ jobs:
 
       - name: Deploy to SUP4
         run: echo "Deploying to SUP4 using Wazi Deploy..."
-		
+
   FNBN-Deploy:
     name: Deploy to FNBN Node
     runs-on: ubuntu-latest
@@ -73,7 +73,7 @@ jobs:
 
       - name: Deploy to EVWN
         run: echo "Deploying to EVWN using Wazi Deploy..."
-		
+
   FN2N-Deploy:
     name: Deploy to FN2N Node
     runs-on: ubuntu-latest

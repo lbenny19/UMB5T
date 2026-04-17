@@ -1,0 +1,89 @@
+name: UMB_Workflow
+
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  Build-job:
+    name: Build Source
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Code
+        run: echo "Checking out UMB source..."
+
+      - name: DBB Build
+        run: echo "Building the source using DBB..."
+
+      - name: Artifactory Upload
+        run: echo "Uploading load modules to Artifactory..."
+
+
+  Extract-CDMF:
+    name: CDMF file extraction
+    runs-on: ubuntu-latest
+    needs: build-umbrella 
+    environment: process-cdmf 
+
+    steps:
+      - name: Generating xmit file
+        run: echo "Generating xmit file in mainframe..."
+
+      - name: Artifactory Upload
+        run: echo "Uploading xmit to Artifactory..."
+
+  SUP4-Deploy:
+    name: Deploy to SUP4 Node
+    runs-on: ubuntu-latest
+    needs: prepare-cdmf 
+    environment: SUP4 
+   
+    steps:
+      - name: Download Artifacts
+        run: echo "Downloading UMB artifacts..."
+
+      - name: Deploy to SUP4
+        run: echo "Deploying to SUP4 using Wazi Deploy..."
+		
+  FNBN-Deploy:
+    name: Deploy to FNBN Node
+    runs-on: ubuntu-latest
+    needs: prepare-cdmf 
+    environment: FNBN 
+   
+    steps:
+      - name: Download Artifacts
+        run: echo "Downloading UMB artifacts..."
+
+      - name: Deploy to FNBN
+        run: echo "Deploying to FNBN using Wazi Deploy..."
+
+  EVWN-Deploy:
+    name: Deploy to EVWN Node
+    runs-on: ubuntu-latest
+    needs: prepare-cdmf 
+    environment: EVWN 
+   
+    steps:
+      - name: Download Artifacts
+        run: echo "Downloading UMB artifacts..."
+
+      - name: Deploy to EVWN
+        run: echo "Deploying to EVWN using Wazi Deploy..."
+		
+  FN2N-Deploy:
+    name: Deploy to FN2N Node
+    runs-on: ubuntu-latest
+    needs: prepare-cdmf 
+    environment: FN2N 
+   
+    steps:
+      - name: Download Artifacts
+        run: echo "Downloading UMB artifacts..."
+
+      - name: Deploy to FN2N
+        run: echo "Deploying to FN2N using Wazi Deploy..."		
+		
